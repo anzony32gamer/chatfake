@@ -15,7 +15,9 @@
     #chat {
       width: 100%;
       height: 100%;
-      overflow: hidden;
+      overflow-y: auto;   /* activa el scroll vertical */
+      display: flex;
+      flex-direction: column;
     }
     .msg {
       margin: 4px 0;
@@ -122,5 +124,6 @@
   </script>
 </body>
 </html>
+
 
 
