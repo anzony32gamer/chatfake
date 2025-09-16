@@ -8,7 +8,7 @@
       background: transparent;
       color: white;
       font-family: Arial, sans-serif;
-      font-size: 14px;  /* tamaño legible */
+      font-size: 14px;  /* cambié de 1px a 14px para que se lea bien */
       margin: 0;
       padding: 20px;
     }
@@ -40,36 +40,61 @@
 
       // Función para generar nombres realistas tipo Twitch/YouTube
       function generarNombre() {
-        const prefijos = ["xX","The","El","La","Super","Dark","Pro","Mega","Ultra","Soy"];
-        const nombres = ["Gamer","Pepe","Maria","Juan","Ana","Loco","Chan","Master","Ninja","Stream"];
-        const sufijos = ["99","21","YT","HD","2000","777","XP","_ok","v2","lol"];
+        const prefijos = ["xX", "The", "El", "La", "Super", "Dark", "Pro", "Mega", "Ultra", "Soy"];
+        const nombres = ["Gamer", "Pepe", "Maria", "Juan", "Ana", "Loco", "Chan", "Master", "Ninja", "Stream"];
+        const sufijos = ["99", "21", "YT", "HD", "2000", "777", "XP", "_ok", "v2", "lol"];
+
         const pref = Math.random() < 0.4 ? prefijos[Math.floor(Math.random()*prefijos.length)] : "";
         const nom = nombres[Math.floor(Math.random()*nombres.length)];
         const suf = Math.random() < 0.7 ? sufijos[Math.floor(Math.random()*sufijos.length)] : "";
+
         return pref + nom + suf;
       }
 
       // Generamos 200 usuarios únicos
       const usuarios = [];
-      for (let i = 0; i < 200; i++) usuarios.push(generarNombre());
+      for (let i = 0; i < 200; i++) {
+        usuarios.push(generarNombre());
+      }
 
       // Frases base
       const frasesBase = [
-        "¡Grande streamer!","JAJAJA","¿Dónde está la cámara?",
-        "Like si te gusta este directo","Salúdame crack","No se escucha el micro",
-        "Esto está épico","Pon músicaaaa","¿Alguien más aquí?",
-        "Me muero de risa","Increíble jugada","Se te escucha bajito",
-        "Qué crack","Eso estuvo buenísimo","Vamossss","Pon el modo difícil",
-        "Qué random esto","Ese bug estuvo raro","Clip por favor","¿Cuándo el 24h?",
-        "Puto migue","Carlos no existe","Karmaland la chupa","Manoseen a Yeray",
-        "Poblo puto gordo","hay que comprarle el Sea Of Thieves a Yeray",
-        "Maldito seas Paco Almagro","Maldito seas Luis Barranco","Que guapo es Luis el Maléfico"
+        "¡Grande streamer!",
+        "JAJAJA",
+        "¿Dónde está la cámara?",
+        "Like si te gusta este directo",
+        "Salúdame crack",
+        "No se escucha el micro",
+        "Esto está épico",
+        "Pon músicaaaa",
+        "¿Alguien más aquí?",
+        "Me muero de risa",
+        "Increíble jugada",
+        "Se te escucha bajito",
+        "Qué crack",
+        "Eso estuvo buenísimo",
+        "Vamossss",
+        "Pon el modo difícil",
+        "Qué random esto",
+        "Ese bug estuvo raro",
+        "Clip por favor",
+        "¿Cuándo el 24h?",
+        "Puto migue",
+        "Carlos no existe",
+        "Karmaland la chupa",
+        "Manoseen a Yeray",
+        "Poblo puto gordo",
+        "hay que comprarle el Sea Of Thieves a Yeray",
+        "Maldito seas Paco Almagro",
+        "Maldito seas Luis Barranco",
+        "Que guapo es Luis el Maléfico"
       ];
 
-      // Añadimos emojis y variaciones
-      const emojis = ["😂","🤣","🔥","👏","😎","🙌","💀","👌","🎉","🤯","😭","👀","✨","🤡"];
+      // Añadimos emojis y variaciones para crear miles de mensajes
+      const emojis = ["😂", "🤣", "🔥", "👏", "😎", "🙌", "💀", "👌", "🎉", "🤯", "😭", "👀", "✨", "🤡"];
       const mensajes = [];
-      for (let i = 0; i < 100; i++) {
+
+      for (let i = 0; i < 100; i++) { // repetir varias veces
         frasesBase.forEach(f => {
           let variacion = f;
           if (Math.random() < 0.5) variacion += " " + emojis[Math.floor(Math.random()*emojis.length)];
@@ -91,14 +116,13 @@
         msg.innerHTML = `<span class="user">${user}:</span> ${text}`;
         chat.appendChild(msg);
 
-        // Scroll al último mensaje
-        msg.scrollIntoView({ behavior: "smooth", block: "end" });
+        if (chat.children.length > 30) chat.removeChild(chat.children[0]);
 
-        // Limitar número de mensajes para no sobrecargar
-        if (chat.children.length > 20) chat.removeChild(chat.children[0]);
+        // Hace que siempre baje al último mensaje
+        chat.scrollTop = chat.scrollHeight;
       }
 
-      // Intervalo: un mensaje cada 1.5 segundos
+      // Intervalo para que aparezca un mensaje cada 1.5 segundos
       setInterval(nuevoMensaje, 1500);
 
     });
