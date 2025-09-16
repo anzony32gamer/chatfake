@@ -8,7 +8,7 @@
       background: transparent;
       color: white;
       font-family: Arial, sans-serif;
-      font-size: 35px;  /* cambié de 1px a 14px para que se lea bien */
+      font-size: 32px;  /* cambié de 1px a 14px para que se lea bien */
       margin: 0;
       padding: 20px;
     }
@@ -116,7 +116,7 @@
         msg.innerHTML = `<span class="user">${user}:</span> ${text}`;
         chat.appendChild(msg);
 
-        if (chat.children.length >= 11) chat.removeChild(chat.children[0]);
+        if (chat.children.length >= 7) chat.removeChild(chat.children[0]);
 
         // Hace que siempre baje al último mensaje
         chat.scrollTop = chat.scrollHeight;
@@ -129,6 +129,7 @@
   </script>
 </body>
 </html>
+
 
 
 
