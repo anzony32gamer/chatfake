@@ -116,7 +116,7 @@
         msg.innerHTML = `<span class="user">${user}:</span> ${text}`;
         chat.appendChild(msg);
 
-        if (chat.children.length > 3) chat.removeChild(chat.children[0]);
+        if (chat.children.length >= 3) chat.removeChild(chat.children[0]);
 
         // Hace que siempre baje al último mensaje
         chat.scrollTop = chat.scrollHeight;
@@ -129,4 +129,5 @@
   </script>
 </body>
 </html>
+
 
