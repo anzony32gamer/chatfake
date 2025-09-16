@@ -8,7 +8,7 @@
       background: transparent;
       color: white;
       font-family: Arial, sans-serif;
-      font-size: 50px;  /* cambié de 1px a 14px para que se lea bien */
+      font-size: 200px;  /* cambié de 1px a 14px para que se lea bien */
       margin: 0;
       padding: 20px;
     }
@@ -237,7 +237,7 @@
         msg.scrollIntoView({ behavior: "smooth", block: "end" });
   
         // Opcional: limitar número de mensajes
-        if (chat.children.length > 40) chat.removeChild(chat.children[0]);
+        if (chat.children.length > 20) chat.removeChild(chat.children[0]);
       }
 
       // Intervalo para que aparezca un mensaje cada 1.5 segundos
@@ -247,21 +247,3 @@
   </script>
 </body>
 </html>
-
-        if (chat.children.length > 30) chat.removeChild(chat.children[0]);
-
-        // Hace que siempre baje al último mensaje
-        chat.scrollTop = chat.scrollHeight;
-      }
-
-      // Intervalo para que aparezca un mensaje cada 1.5 segundos
-      setInterval(nuevoMensaje, 1500);
-
-    });
-  </script>
-</body>
-</html>
-
-
-
-
