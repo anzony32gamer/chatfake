@@ -8,27 +8,26 @@
       background: transparent;
       color: white;
       font-family: Arial, sans-serif;
-      font-size: 35px;  /* cambié de 1px a 14px para que se lea bien */
+      font-size: 14px;
       margin: 0;
       padding: 20px;
     }
     #chat {
       width: 100%;
       height: 100%;
-      overflow-y: auto;   /* scroll automático */
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
-      scrollbar-width: none; /* oculta barra en Firefox */
+      scrollbar-width: none;
     }
     #chat::-webkit-scrollbar {
-      display: none;      /* oculta barra en Chrome/OBS */
+      display: none;
     }
     .msg {
       margin: 4px 0;
     }
     .user {
       font-weight: bold;
-      color: #6cf;
     }
   </style>
 </head>
@@ -37,8 +36,16 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
+      const chat = document.getElementById("chat");
 
-      // Función para generar nombres realistas tipo Twitch/YouTube
+      // Colores estilo Twitch
+      const colores = [
+        "#FF4500", "#2E8B57", "#1E90FF", "#DA70D6", "#FFD700",
+        "#00CED1", "#FF69B4", "#ADFF2F", "#FF6347", "#7B68EE",
+        "#00FF7F", "#FF8C00", "#20B2AA", "#BA55D3", "#DC143C"
+      ];
+
+      // Función para generar nombres realistas
       function generarNombre() {
         const prefijos = ["xX", "The", "El", "La", "Super", "Dark", "Pro", "Mega", "Ultra", "Soy"];
         const nombres = ["Gamer", "Pepe", "Maria", "Juan", "Ana", "Loco", "Chan", "Master", "Ninja", "Stream"];
@@ -51,50 +58,32 @@
         return pref + nom + suf;
       }
 
-      // Generamos 200 usuarios únicos
-      const usuarios = [];
+      // Crear 200 usuarios con color fijo
+      const usuarios = {};
       for (let i = 0; i < 200; i++) {
-        usuarios.push(generarNombre());
+        const nombre = generarNombre();
+        usuarios[nombre] = colores[Math.floor(Math.random() * colores.length)];
       }
 
       // Frases base
       const frasesBase = [
-        "¡Grande streamer!",
-        "JAJAJA",
-        "¿Dónde está la cámara?",
-        "Like si te gusta este directo",
-        "Salúdame crack",
-        "No se escucha el micro",
-        "Esto está épico",
-        "Pon músicaaaa",
-        "¿Alguien más aquí?",
-        "Me muero de risa",
-        "Increíble jugada",
-        "Se te escucha bajito",
-        "Qué crack",
-        "Eso estuvo buenísimo",
-        "Vamossss",
-        "Pon el modo difícil",
-        "Qué random esto",
-        "Ese bug estuvo raro",
-        "Clip por favor",
-        "¿Cuándo el 24h?",
-        "Puto migue",
-        "Carlos no existe",
-        "Karmaland la chupa",
-        "Manoseen a Yeray",
-        "Poblo puto gordo",
-        "hay que comprarle el Sea Of Thieves a Yeray",
-        "Maldito seas Paco Almagro",
-        "Maldito seas Luis Barranco",
+        "¡Grande streamer!", "JAJAJA", "¿Dónde está la cámara?",
+        "Like si te gusta este directo", "Salúdame crack", "No se escucha el micro",
+        "Esto está épico", "Pon músicaaaa", "¿Alguien más aquí?",
+        "Me muero de risa", "Increíble jugada", "Se te escucha bajito",
+        "Qué crack", "Eso estuvo buenísimo", "Vamossss",
+        "Pon el modo difícil", "Qué random esto", "Ese bug estuvo raro",
+        "Clip por favor", "¿Cuándo el 24h?", "Puto migue",
+        "Carlos no existe", "Karmaland la chupa", "Manoseen a Yeray",
+        "Poblo puto gordo", "hay que comprarle el Sea Of Thieves a Yeray",
+        "Maldito seas Paco Almagro", "Maldito seas Luis Barranco",
         "Que guapo es Luis el Maléfico"
       ];
 
-      // Añadimos emojis y variaciones para crear miles de mensajes
       const emojis = ["😂", "🤣", "🔥", "👏", "😎", "🙌", "💀", "👌", "🎉", "🤯", "😭", "👀", "✨", "🤡"];
       const mensajes = [];
 
-      for (let i = 0; i < 100; i++) { // repetir varias veces
+      for (let i = 0; i < 100; i++) {
         frasesBase.forEach(f => {
           let variacion = f;
           if (Math.random() < 0.5) variacion += " " + emojis[Math.floor(Math.random()*emojis.length)];
@@ -104,46 +93,23 @@
         });
       }
 
-      // Función para generar un mensaje nuevo
       function nuevoMensaje() {
-        const chat = document.getElementById("chat");
-        const msg = document.createElement("div");
-        msg.className = "msg";
-
-        const user = usuarios[Math.floor(Math.random() * usuarios.length)];
+        const nombres = Object.keys(usuarios);
+        const user = nombres[Math.floor(Math.random() * nombres.length)];
         const text = mensajes[Math.floor(Math.random() * mensajes.length)];
 
-        msg.innerHTML = `<span class="user">${user}:</span> ${text}`;
+        const msg = document.createElement("div");
+        msg.className = "msg";
+        msg.innerHTML = `<span class="user" style="color:${usuarios[user]}">${user}:</span> ${text}`;
         chat.appendChild(msg);
 
-        if (chat.children.length >= 11) chat.removeChild(chat.children[0]);
+        if (chat.children.length > 40) chat.removeChild(chat.children[0]);
 
-        // Hace que siempre baje al último mensaje
-        chat.scrollTop = chat.scrollHeight;
+        msg.scrollIntoView({ behavior: "smooth", block: "end" });
       }
 
-      // Intervalo para que aparezca un mensaje cada 1.5 segundos
       setInterval(nuevoMensaje, 1500);
-
     });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
