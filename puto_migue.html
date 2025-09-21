@@ -8,7 +8,7 @@
       background: transparent;
       color: white;
       font-family: Arial, sans-serif;
-      font-size: 14px;
+      font-size: 35px;
       margin: 0;
       padding: 20px;
     }
@@ -103,7 +103,7 @@
         msg.innerHTML = `<span class="user" style="color:${usuarios[user]}">${user}:</span> ${text}`;
         chat.appendChild(msg);
 
-        if (chat.children.length > 40) chat.removeChild(chat.children[0]);
+        if (chat.children.length > 7) chat.removeChild(chat.children[0]);
 
         msg.scrollIntoView({ behavior: "smooth", block: "end" });
       }
@@ -113,3 +113,4 @@
   </script>
 </body>
 </html>
+
