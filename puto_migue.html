@@ -103,7 +103,7 @@
         msg.innerHTML = `<span class="user" style="color:${usuarios[user]}">${user}:</span> ${text}`;
         chat.appendChild(msg);
 
-        if (chat.children.length > 9) chat.removeChild(chat.children[0]);
+        if (chat.children.length > 12) chat.removeChild(chat.children[0]);
 
         msg.scrollIntoView({ behavior: "smooth", block: "end" });
       }
@@ -113,5 +113,6 @@
   </script>
 </body>
 </html>
+
 
 
